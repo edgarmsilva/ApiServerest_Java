@@ -35,7 +35,7 @@ public class ApiServerest_steps {
 
     @Então("deve receber as mensagens de erro:")
     public void deve_receber_as_mensagens_de_erro(io.cucumber.datatable.DataTable dataTable) {
-        
+
 
         throw new io.cucumber.java.PendingException();
     }
