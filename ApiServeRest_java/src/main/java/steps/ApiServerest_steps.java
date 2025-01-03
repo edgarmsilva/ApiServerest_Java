@@ -26,6 +26,11 @@ public class ApiServerest_steps {
         response = Serverest.login(usuario, senha);
     }
 
+    @Então("a API retorna o status code {int}")
+    public void a_api_retorna_o_status_code(int stausCode) {
+        Assert.assertEquals(stausCode, response.getStatusCode());
+    }
+
     @Então("devo receber a mensagem {string}")
     public void devo_receber_a_mensagem(String mensagem) {
         Assert.assertEquals(response.getBody().jsonPath().get("message"), mensagem);
@@ -119,6 +124,43 @@ public class ApiServerest_steps {
                 Assert.assertEquals(dado, response.getBody().jsonPath().get("usuarios[0]." + campo));
             }
         });
+    }
+
+    @Quando("fizer uma requisição do tipo GET para buscar o usuário utilizando seu ID")
+    public void fizer_uma_requisição_do_tipo_get_para_buscar_o_usuário_utilizando_seu_id() {
+        response = Serverest.buscarUsuarioId(userId);
+    }
+
+    @Então("devo receber os dados do usuário")
+    public void devo_receber_os_dados_do_usuário(io.cucumber.datatable.DataTable dataTable) {
+        map = dataTable.asMap(String.class, String.class);
+        map.forEach((campo, dado) -> {
+            if (campo.equals("_id")) {
+                Assert.assertEquals(userId, response.getBody().jsonPath().get(campo));
+            } else {
+                Assert.assertEquals(dado, response.getBody().jsonPath().get(campo));
+            }
+        });
+    }
+
+    @Quando("fizer uma requisição do tipo GET para buscar o usuário sem informar um ID")
+    public void fizer_uma_requisição_do_tipo_get_para_buscar_o_usuário_sem_informar_um_id() {
+        response = Serverest.buscarUsuarioId("");
+    }
+
+    @Quando("fizer uma requisição do tipo DELETE para excluir esse usuário informando seu ID")
+    public void fizer_uma_requisição_do_tipo_delete_para_excluir_esse_usuário_informando_seu_id() {
+        response = Serverest.excluirUsuario(userId);
+    }
+
+    @Quando("fizer uma requisição do tipo DELETE para excluir um usuário inexistente")
+    public void fizer_uma_requisição_do_tipo_delete_para_excluir_um_usuário_inexistente() {
+        response = Serverest.excluirUsuario("useridinexistente");
+    }
+
+    @Quando("fizer uma requisição do tipo DELETE para excluir um usuário sem informar um ID")
+    public void fizer_uma_requisição_do_tipo_delete_para_excluir_um_usuário_sem_informar_um_id() {
+        response = Serverest.excluirUsuario("");
     }
 
 }

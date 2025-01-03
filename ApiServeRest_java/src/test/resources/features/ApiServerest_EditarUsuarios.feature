@@ -9,8 +9,10 @@ Funcionalidade: Validar funcionalidades de Edição de usuário da Api Serverest
       | email         | "testeAutomacao_editado@email.com" |
       | password      | "teste123_editado"                 |
       | administrador | "false"                            |
-    Então devo receber a mensagem "Registro alterado com sucesso"
+    Então a API retorna o status code 200
+    E devo receber a mensagem "Registro alterado com sucesso"
     E verifico que os dados do usuário foram atualizados na consulta
+    E excluo o usuário de teste com sucesso
 
   Cenario: CT002 - Editar um usuário sem informar o id
     Dado que eu possua um usuário Cadastrado
@@ -19,7 +21,8 @@ Funcionalidade: Validar funcionalidades de Edição de usuário da Api Serverest
       | email         | "testeAutomacao_editado@email.com" |
       | password      | "teste123_editado"                 |
       | administrador | "false"                            |
-    Então devo receber a mensagem "Não é possível realizar PUT em /usuarios/. Acesse https://serverest.dev para ver as rotas disponíveis e como utilizá-las."
+    Então a API retorna o status code 405
+    E devo receber a mensagem "Não é possível realizar PUT em /usuarios/. Acesse https://serverest.dev para ver as rotas disponíveis e como utilizá-las."
 
   Cenario: CT003 - Editar um usuário sem informar nenhum dado
     Dado que eu possua um usuário Cadastrado
@@ -28,7 +31,8 @@ Funcionalidade: Validar funcionalidades de Edição de usuário da Api Serverest
       | email         | "" |
       | password      | "" |
       | administrador | "" |
-    Então devo receber a mensagem de erro correspondente
+    Então a API retorna o status code 400
+    E devo receber a mensagem de erro correspondente
       | nome          | nome não pode ficar em branco            |
       | email         | email não pode ficar em branco           |
       | password      | password não pode ficar em branco        |
@@ -41,7 +45,8 @@ Funcionalidade: Validar funcionalidades de Edição de usuário da Api Serverest
       | email         | "email.com"               |
       | password      | "teste123_editado"        |
       | administrador | "false"                   |
-    Então devo receber a mensagem de erro correspondente
+    Então a API retorna o status code 400
+    E devo receber a mensagem de erro correspondente
       | email | email deve ser um email válido |
 
   Cenario: CT005 - Editar um usuário informando opção de administrator que não seja válida
@@ -51,5 +56,6 @@ Funcionalidade: Validar funcionalidades de Edição de usuário da Api Serverest
       | email         | "email.com"               |
       | password      | "teste123_editado"        |
       | administrador | "verdadeiro"              |
-    Então devo receber a mensagem de erro correspondente
+    Então a API retorna o status code 400
+    E devo receber a mensagem de erro correspondente
       | administrador | administrador deve ser 'true' ou 'false' |

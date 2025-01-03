@@ -127,4 +127,20 @@ public class Serverest {
 
         return response;
     }
+
+    public static Response buscarUsuarioId(String userId) {
+
+        userId = userId.equals("") ? "_id" : userId;
+
+        Response response = RestAssured.given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .log().all()
+                .get("https://serverest.dev/usuarios/" + userId)
+                .then()
+                .log().all()
+                .extract().response();
+
+        return response;
+    }
 }
