@@ -8,7 +8,7 @@ Funcionalidade: Validar funcionalidades de Cadastro de usuário da Api Serverest
       | email         | "automacao.teste@teste.com" |
       | password      | "teste123"                  |
       | administrador | "false"                     |
-    Então deve receber a mensagem "Cadastro realizado com sucesso"
+    Então devo receber a mensagem "Cadastro realizado com sucesso"
     E o id do usuário cadastrado realizado com sucesso
 
   Cenario: CT002 - Tentativa de cadastro de usuário sem enviar os dados obrigatórios
@@ -17,7 +17,7 @@ Funcionalidade: Validar funcionalidades de Cadastro de usuário da Api Serverest
       | email         | "" |
       | password      | "" |
       | administrador | "" |
-    Então deve receber a mensagem de erro correspondente
+    Então devo receber a mensagem de erro correspondente
       | nome          | nome não pode ficar em branco            |
       | email         | email não pode ficar em branco           |
       | password      | password não pode ficar em branco        |
@@ -29,7 +29,7 @@ Funcionalidade: Validar funcionalidades de Cadastro de usuário da Api Serverest
       | email         | "teste.teste@teste.com" |
       | password      | "teste123"              |
       | administrador | "true"                  |
-    Então deve receber a mensagem de erro correspondente
+    Então devo receber a mensagem de erro correspondente
       | email | email deve ser um email válido |
 
   Cenario: CT004 - Tentativa de cadastro de usuário com email inválido
@@ -38,5 +38,5 @@ Funcionalidade: Validar funcionalidades de Cadastro de usuário da Api Serverest
       | email         | "teste.teste@teste.com" |
       | password      | "teste123"              |
       | administrador | "verdadeiro"            |
-    Então deve receber a mensagem de erro correspondente
+    Então devo receber a mensagem de erro correspondente
       | administrador | administrador deve ser 'true' ou 'false' |

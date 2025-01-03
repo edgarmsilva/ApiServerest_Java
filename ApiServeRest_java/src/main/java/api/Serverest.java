@@ -56,8 +56,8 @@ public class Serverest {
 
     public static String CadastrarUsuarioTeste() {
         String body = "{\n" +
-                "  \"nome\": \"teste Automação\",\n" +
-                "  \"email\": \"testeautomacao@email.com\",\n" +
+                "  \"nome\": \"testeAutomacao\",\n" +
+                "  \"email\": \"testeAutomacao@email.com\",\n" +
                 "  \"password\": \"teste123\",\n" +
                 "  \"administrador\": \"false\"\n" +
                 "}";
@@ -91,7 +91,7 @@ public class Serverest {
                 .accept(ContentType.JSON)
                 .body(body)
                 .log().all()
-                .put("https://serverest.dev/usuarios/"+id)
+                .put("https://serverest.dev/usuarios/" + id)
                 .then()
                 .log().all()
                 .extract().response();
@@ -107,6 +107,20 @@ public class Serverest {
                 .param(tipo, valor)
                 .log().all()
                 .get("https://serverest.dev/usuarios")
+                .then()
+                .log().all()
+                .extract().response();
+
+        return response;
+    }
+
+    public static Response excluirUsuario(String id) {
+
+        Response response = RestAssured.given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .log().all()
+                .delete("https://serverest.dev/usuarios/" + id)
                 .then()
                 .log().all()
                 .extract().response();
