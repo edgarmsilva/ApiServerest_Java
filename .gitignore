@@ -6,3 +6,6 @@ target/
 ### IntelliJ IDEA ###
 .idea/
 .idea/workspace.xml
+
+.allure/
+allure-report
