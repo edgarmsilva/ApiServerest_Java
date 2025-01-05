@@ -1,4 +1,4 @@
-package steps;
+package stepDefinitions;
 
 import api.Serverest;
 import io.cucumber.java.Before;
