@@ -1,0 +1,20 @@
+name: Executar Testes
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Configurar JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Execução dos testes
+        run: mvn clean test
