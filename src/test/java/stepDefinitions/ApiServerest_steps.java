@@ -1,8 +1,6 @@
-package steps;
+package stepDefinitions;
 
 import api.Serverest;
-import io.cucumber.cienvironment.internal.com.eclipsesource.json.JsonArray;
-import io.cucumber.cienvironment.internal.com.eclipsesource.json.JsonObject;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.E;
@@ -11,7 +9,6 @@ import io.cucumber.java.pt.Quando;
 import io.restassured.response.Response;
 import org.junit.Assert;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 public class ApiServerest_steps {
@@ -74,14 +71,14 @@ public class ApiServerest_steps {
 
     @Quando("fizer uma requisição do tipo PUT para editar o usuário com as informações abaixo")
     public void fizer_uma_requisição_do_tipo_put_para_editar_o_usuário_com_as_informações_abaixo
-            (io.cucumber.datatable.DataTable data) {
+            (DataTable data) {
         map = data.asMap(String.class, String.class);
         response = Serverest.editarUsuario(data, userId);
     }
 
     @Quando("fizer uma requisição do tipo PUT para editar o usuário com as informações abaixo sem informar o ID")
     public void fizer_uma_requisição_do_tipo_put_para_editar_o_usuário_com_as_informações_abaixo_sem_informar_o_id
-            (io.cucumber.datatable.DataTable data) {
+            (DataTable data) {
         map = data.asMap(String.class, String.class);
         response = Serverest.editarUsuario(data, "");
     }
@@ -103,7 +100,7 @@ public class ApiServerest_steps {
 
     @Quando("fizer uma requisição do tipo GET para listar o usuário com as informações abaixo")
     public void fizer_uma_requisição_do_tipo_get_para_listar_o_usuário_com_as_informações_abaixo
-            (io.cucumber.datatable.DataTable dataTable) {
+            (DataTable dataTable) {
         map = dataTable.asMap(String.class, String.class);
 
         map.forEach((campo, dado) -> {
@@ -132,7 +129,7 @@ public class ApiServerest_steps {
     }
 
     @Então("devo receber os dados do usuário")
-    public void devo_receber_os_dados_do_usuário(io.cucumber.datatable.DataTable dataTable) {
+    public void devo_receber_os_dados_do_usuário(DataTable dataTable) {
         map = dataTable.asMap(String.class, String.class);
         map.forEach((campo, dado) -> {
             if (campo.equals("_id")) {
