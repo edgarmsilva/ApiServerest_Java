@@ -30,18 +30,21 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Install Allure CLI
-        run: |
-            wget https://github.com/allure-framework/allure2/releases/download/2.13.8/allure-2.13.8.tgz
-            tar -zxvf allure-2.13.8.tgz
-            sudo mv allure-2.13.8 /opt/allure
-            sudo ln -s /opt/allure/bin/allure /usr/bin/allure
+      - name: Test marketplace action
+        uses: simple-elf/allure-report-action@master
+        if: always()
+        id: allure-report
+        with:
+          allure_results: target/allure-results
+          gh_pages: gh-pages
+          allure_report: allure-report
+          allure_history: allure-history
 
       - name: Run with Maven
         run: mvn clean test
 
       - name: Generate report
-        run: allure generate output/allure-results -o allure-report --clean
+        run: mvn allure:report
 
       - name: Load test report history
         uses: actions/checkout@v3
@@ -66,3 +69,11 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: target/report
+
+      - name: Deploy report to Github Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v2
+        env:
+          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: target/site/allure-maven-plugin
