@@ -1,4 +1,4 @@
-name: Executar Testes
+name: Executar Testes Manuais
 
 on: workflow_dispatch
 

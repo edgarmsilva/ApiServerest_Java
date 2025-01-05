@@ -23,8 +23,18 @@ Validar o Login de usuários
 Execute o comando abaixo para instalar todas as dependencias:
 ```mvn clean install```
 
-## Execução:
+## Execução local:
 Para rodar todos os testes, executar o comando abaixo no console:
 ```mvn clean test```
 
-Para exe
+## Execução através do github Actions manualmente:
+Acessar o actions do projeto:
+https://github.com/edgarmsilva/ApiServerest_Java/actions
+
+clicar em "Executar testes Manuais"
+ - depois no dropdown "Run Workflow" 
+ - Selecionar a branch main
+ - Clicar no botão "Run Workflow"
+
+
+
