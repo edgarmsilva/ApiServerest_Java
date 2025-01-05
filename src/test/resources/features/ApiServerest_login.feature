@@ -3,7 +3,8 @@
 Funcionalidade: Validar Login da Api Serverest
 
   Cenario: CT001 - Login com sucesso
-    Quando o usuário "edgar.teste@teste.com" fizer login com a senha "teste123"
+    Dado que eu possua um usuário Cadastrado
+    Quando o usuário "testeAutomacao@email.com" fizer login com a senha "teste123"
     Então a API retorna o status code 200
     Então devo receber a mensagem "Login realizado com sucesso"
     E o token de autorização
